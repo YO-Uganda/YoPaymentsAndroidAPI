@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/YoPaymentsAndroid.iml" filepath="$PROJECT_DIR$/YoPaymentsAndroid.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/yopaymentslibrary/yopaymentslibrary.iml" filepath="$PROJECT_DIR$/yopaymentslibrary/yopaymentslibrary.iml" />
+    </modules>
+  </component>
+</project>
