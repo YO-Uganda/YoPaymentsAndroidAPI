@@ -3,7 +3,10 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/YoPaymentsAndroid.iml" filepath="$PROJECT_DIR$/YoPaymentsAndroid.iml" />
+      <module fileurl="file://$PROJECT_DIR$/YoPaymentsAndroidAPI.iml" filepath="$PROJECT_DIR$/YoPaymentsAndroidAPI.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/yopaymentslibrary/yopaymentslibrary.iml" filepath="$PROJECT_DIR$/yopaymentslibrary/yopaymentslibrary.iml" />
       <module fileurl="file://$PROJECT_DIR$/yopaymentslibrary/yopaymentslibrary.iml" filepath="$PROJECT_DIR$/yopaymentslibrary/yopaymentslibrary.iml" />
     </modules>
   </component>
