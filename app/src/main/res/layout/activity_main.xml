@@ -15,4 +15,13 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <Button
+        android:id="@+id/pay_button"
+        android:layout_width="368dp"
+        android:layout_height="wrap_content"
+        android:text="@string/pay_me"
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="0dp" />
+
+
 </android.support.constraint.ConstraintLayout>

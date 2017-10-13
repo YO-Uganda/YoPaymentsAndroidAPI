@@ -97,6 +97,10 @@ public class YoPaymentsResponseXMLParser {
                 parser.require(XmlPullParser.START_TAG, ns, "TransactionCompletionDate");
                 response.setTransactionCompletionDate(readText(parser));
                 parser.require(XmlPullParser.END_TAG, ns, "TransactionCompletionDate");
+            }else if (name.equals("MNOTransactionReferenceId")){
+                parser.require(XmlPullParser.START_TAG, ns, "MNOTransactionReferenceId");
+                response.setMNOTransactionReferenceId(readText(parser));
+                parser.require(XmlPullParser.END_TAG, ns, "MNOTransactionReferenceId");
             }else{
                 skip(parser);
             }
