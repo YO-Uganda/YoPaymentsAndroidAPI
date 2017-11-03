@@ -2,6 +2,9 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
+<<<<<<< HEAD
     <mapping directory="$PROJECT_DIR$/yopaymentslibrary" vcs="Git" />
+=======
+>>>>>>> 35a620685196894b493d7de50fd30eac83da3926
   </component>
 </project>
