@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 
 import java.util.concurrent.ExecutionException;
 
@@ -18,6 +19,8 @@ public class MainActivity extends AppCompatActivity {
     private EditText amount;
     private EditText reason;
 
+    private ProgressBar progress;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,6 +31,8 @@ public class MainActivity extends AppCompatActivity {
         reason = (EditText) findViewById(R.id.pay_input_reason);
         Button pay_btn = (Button) findViewById(R.id.pay_button);
 
+        progress = (ProgressBar) findViewById(R.id.progress_bar);
+
         pay_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -37,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
                 yoPay.setMsisdn("256712256785");
                 yoPay.setAmount(500);
                 yoPay.setNarrative("Reason for deposit of funds");
+                yoPay.setProgressBar(progress);
                 try {
                     YoPaymentsResponse response = yoPay.execute("acdepositfunds").get();
                     Log.i("YOPAY", "" + response.toString());

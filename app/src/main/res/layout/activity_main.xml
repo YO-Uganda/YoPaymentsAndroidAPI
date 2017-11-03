@@ -9,6 +9,13 @@
     android:padding="10dp"
     tools:context="ug.co.yo.yopay.yopaymentsandroid.MainActivity">
 
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:indeterminate="true"
+        android:visibility="gone" />
+
     <Button
         android:id="@+id/pay_button"
         android:layout_width="368dp"

@@ -2,6 +2,8 @@ package ug.co.yo.yopay.yopaymentslibrary;
 
 import android.os.AsyncTask;
 import android.util.Log;
+import android.view.View;
+import android.widget.ProgressBar;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -52,6 +54,8 @@ public class YoPayFinal extends AsyncTask<String, Void, YoPaymentsResponse> {
     private static final int WAIT_TIME_IN_MINUTES = 1;
     private static final int SLEEP_TIME_IN_SECONDS = 10;
 
+    private ProgressBar progress;
+
     public YoPayFinal() {
     }
 
@@ -70,6 +74,10 @@ public class YoPayFinal extends AsyncTask<String, Void, YoPaymentsResponse> {
 
     public void setNarrative(String narrative) {
         this.narrative = narrative;
+    }
+
+    public void setProgressBar(ProgressBar progress) {
+        this.progress = progress;
     }
 
     public YoPaymentsResponse ac_deposit_funds() {
@@ -177,11 +185,16 @@ public class YoPayFinal extends AsyncTask<String, Void, YoPaymentsResponse> {
 
     @Override
     protected void onPreExecute() {
+        Log.i("YoPayxxx", "Progress is visible");
+        if (progress != null) {
+            progress.setVisibility(View.VISIBLE);
+        }
     }
 
     @Override
     protected YoPaymentsResponse doInBackground(String... params) {
         YoPaymentsResponse response = null;
+        Log.i("YoPayxxx", "Progress in the background");
         if (params[0] == "acdepositfunds") {
             response = ac_deposit_funds();
         }
@@ -190,5 +203,9 @@ public class YoPayFinal extends AsyncTask<String, Void, YoPaymentsResponse> {
 
     @Override
     protected void onPostExecute(YoPaymentsResponse response) {
+        Log.i("YoPayxxx", "Progress is invisible");
+        if (progress != null) {
+            progress.setVisibility(View.GONE);
+        }
     }
 }
