@@ -4,16 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:gravity="center"
+    android:orientation="vertical"
     android:padding="10dp"
     tools:context="ug.co.yo.yopay.yopaymentsandroid.MainActivity">
-
-    <FrameLayout
-        android:id="@+id/frameContainer"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_below="@+id/close_activity" />
 
     <Button
         android:id="@+id/pay_button"
@@ -22,7 +16,6 @@
         android:text="@string/pay_me"
         tools:layout_editor_absoluteX="8dp"
         tools:layout_editor_absoluteY="0dp" />
-
 
 </LinearLayout>
 

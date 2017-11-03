@@ -2,7 +2,6 @@ package ug.co.yo.yopay.yopaymentslibrary;
 
 import android.os.AsyncTask;
 import android.util.Log;
-import android.view.View;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -53,18 +52,27 @@ public class YoPayFinal extends AsyncTask<String, Void, YoPaymentsResponse> {
     private static final int WAIT_TIME_IN_MINUTES = 1;
     private static final int SLEEP_TIME_IN_SECONDS = 10;
 
-    public YoPayFinal(){}
+    public YoPayFinal() {
+    }
 
-    public YoPayFinal(String username, String password){
+    public YoPayFinal(String username, String password) {
         this.username = username;
         this.password = password;
     }
 
-    public void setMsisdn(String msisdn){this.msisdn = msisdn;}
-    public void setAmount(double amount){this.amount = amount;}
-    public void setNarrative(String narrative){this.narrative = narrative;}
+    public void setMsisdn(String msisdn) {
+        this.msisdn = msisdn;
+    }
 
-    public YoPaymentsResponse ac_deposit_funds(){
+    public void setAmount(double amount) {
+        this.amount = amount;
+    }
+
+    public void setNarrative(String narrative) {
+        this.narrative = narrative;
+    }
+
+    public YoPaymentsResponse ac_deposit_funds() {
         YoPaymentsResponse response = null;
         String xmlString = getAcDepositFundsXMLString();
         InputStream is = sendXMLRequest(xmlString);
@@ -78,11 +86,11 @@ public class YoPayFinal extends AsyncTask<String, Void, YoPaymentsResponse> {
         return response;
     }
 
-    private String getAcDepositFundsXMLString(){
+    private String getAcDepositFundsXMLString() {
         String xmlString = "";
         DocumentBuilderFactory dbfactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder dBuilder;
-        try{
+        try {
             dBuilder = dbfactory.newDocumentBuilder();
             Document doc = dBuilder.newDocument();
             Element autoCreate = doc.createElement("AutoCreate");
@@ -99,40 +107,50 @@ public class YoPayFinal extends AsyncTask<String, Void, YoPaymentsResponse> {
 
             xmlString = writer.toString();
 
-        }catch (Exception e){e.printStackTrace();}
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return xmlString;
     }
 
-    private Node getRequest(Document doc){
+    private Node getRequest(Document doc) {
         Element request = doc.createElement("Request");
         request.appendChild(getRequestElements(doc, request, "APIUsername", this.username));
         request.appendChild(getRequestElements(doc, request, "APIPassword", this.password));
         request.appendChild(getRequestElements(doc, request, "Method", "acdepositfunds"));
-        if(this.NonBlocking){request.appendChild(getRequestElements(doc, request, "NonBlocking","TRUE"));}
+        if (this.NonBlocking) {
+            request.appendChild(getRequestElements(doc, request, "NonBlocking", "TRUE"));
+        }
         request.appendChild(getRequestElements(doc, request, "Account", this.msisdn));
-        request.appendChild(getRequestElements(doc, request, "Amount", ""+this.amount));
+        request.appendChild(getRequestElements(doc, request, "Amount", "" + this.amount));
         request.appendChild(getRequestElements(doc, request, "Narrative", this.narrative));
-        if(this.external_reference!=null){request.appendChild(getRequestElements(doc, request, "ExternalReference", this.external_reference));}
-        if(this.instant_notification_url!=null){request.appendChild(getRequestElements(doc, request, "InstantNotificationUrl", this.instant_notification_url));}
-        if(this.failure_notification_url!=null){request.appendChild(getRequestElements(doc, request, "FailureNotificationUrl", this.failure_notification_url));}
+        if (this.external_reference != null) {
+            request.appendChild(getRequestElements(doc, request, "ExternalReference", this.external_reference));
+        }
+        if (this.instant_notification_url != null) {
+            request.appendChild(getRequestElements(doc, request, "InstantNotificationUrl", this.instant_notification_url));
+        }
+        if (this.failure_notification_url != null) {
+            request.appendChild(getRequestElements(doc, request, "FailureNotificationUrl", this.failure_notification_url));
+        }
         return request;
     }
 
-    private static Node getRequestElements(Document doc, Element element, String name, String value){
+    private static Node getRequestElements(Document doc, Element element, String name, String value) {
         Element node = doc.createElement(name);
         node.appendChild(doc.createTextNode(value));
         return node;
     }
 
-    private InputStream sendXMLRequest(String xmlString){
+    private InputStream sendXMLRequest(String xmlString) {
         InputStream is = null;
         try {
             java.net.URL url = new URL(this.URL);
             HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
             urlConnection.setRequestMethod("POST");
-            urlConnection.setRequestProperty("Content-Length",""+xmlString.length());
-            urlConnection.setRequestProperty("Content-Type","text/xml; charset=utf-8");
-            urlConnection.setRequestProperty("Content-transfer-encoding","text");
+            urlConnection.setRequestProperty("Content-Length", "" + xmlString.length());
+            urlConnection.setRequestProperty("Content-Type", "text/xml; charset=utf-8");
+            urlConnection.setRequestProperty("Content-transfer-encoding", "text");
             urlConnection.setDoInput(true);
             urlConnection.setDoOutput(true);
             urlConnection.setFixedLengthStreamingMode(xmlString.length());
@@ -145,30 +163,32 @@ public class YoPayFinal extends AsyncTask<String, Void, YoPaymentsResponse> {
             out.close();
 
             int responseCode = urlConnection.getResponseCode();
-            if(responseCode == HttpsURLConnection.HTTP_OK){
+            if (responseCode == HttpsURLConnection.HTTP_OK) {
                 is = urlConnection.getInputStream();
             }
 
-        }catch (SSLHandshakeException e){
+        } catch (SSLHandshakeException e) {
 
-        }catch (Exception e){
-            Log.e("YOPAYxxx","ERROR: "+e);
+        } catch (Exception e) {
+            Log.e("YOPAYxxx", "ERROR: " + e);
         }
         return is;
     }
 
     @Override
-    protected void onPreExecute(){}
+    protected void onPreExecute() {
+    }
 
     @Override
-    protected YoPaymentsResponse doInBackground(String... params){
+    protected YoPaymentsResponse doInBackground(String... params) {
         YoPaymentsResponse response = null;
-        if(params[0]=="acdepositfunds") {
+        if (params[0] == "acdepositfunds") {
             response = ac_deposit_funds();
         }
         return response;
     }
 
     @Override
-    protected void onPostExecute(YoPaymentsResponse response){}
+    protected void onPostExecute(YoPaymentsResponse response) {
+    }
 }
