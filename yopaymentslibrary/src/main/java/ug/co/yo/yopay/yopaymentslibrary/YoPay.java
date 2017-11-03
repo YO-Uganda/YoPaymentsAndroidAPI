@@ -1,20 +1,32 @@
 package ug.co.yo.yopay.yopaymentslibrary;
 
 import android.os.AsyncTask;
+import android.os.Environment;
 import android.util.Log;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 
+import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.BufferedWriter;
+import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.StringWriter;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URL;
+import java.security.NoSuchProviderException;
+import java.security.cert.Certificate;
+import java.security.cert.CertificateException;
+import java.security.cert.CertificateFactory;
+import java.security.cert.X509Certificate;
 import java.util.Calendar;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
@@ -165,6 +177,21 @@ public class YoPay {
         }
 
         return is;
+    }
+
+    public void setupHTTPSConnection(){
+
+        try{
+            java.net.URL url = new URL(this.URL);
+            CertificateFactory cf = CertificateFactory.getInstance("X.509");
+            InputStream caInput = new BufferedInputStream(new YoCertificate().getInputStream());
+            Certificate ca = cf.generateCertificate(caInput);
+            Log.i("MAIN", "ca="+((X509Certificate) ca).getSubjectDN());
+        }catch (MalformedURLException e){
+            e.printStackTrace();
+        }catch (CertificateException e){
+            e.printStackTrace();
+        }
     }
 
     private String getCheckTransactionXML(String transactionReference) throws Exception{
