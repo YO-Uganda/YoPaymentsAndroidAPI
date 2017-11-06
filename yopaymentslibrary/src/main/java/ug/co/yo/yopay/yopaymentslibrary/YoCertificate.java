@@ -1,17 +1,16 @@
 package ug.co.yo.yopay.yopaymentslibrary;
 
-import android.util.Log;
-
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 
 public class YoCertificate {
-    public InputStream getInputStream(){
+    public InputStream getInputStream() {
         InputStream stream = null;
         stream = new ByteArrayInputStream(getCertificateString().getBytes());
         return stream;
     }
-    private String getCertificateString(){
+
+    private String getCertificateString() {
         return "MIIEvTCCA6WgAwIBAgIJAN3e7VqDg5zQMA0GCSqGSIb3DQEBBQUAMIGaMQswCQYD" +
                 "VQQGEwJVRzEQMA4GA1UECBMHS2FtcGFsYTEQMA4GA1UEBxMHS2FtcGFsYTEbMBkG" +
                 "A1UECgwSWW8hIFVnYW5kYSBMaW1pdGVkMRUwEwYDVQQLDAxZbyEgUGF5bWVudHMx" +

@@ -6,11 +6,10 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ProgressBar;
 
 import java.util.concurrent.ExecutionException;
 
-import ug.co.yo.yopay.yopaymentslibrary.YoPayFinal;
+import ug.co.yo.yopay.yopaymentslibrary.YoPay;
 import ug.co.yo.yopay.yopaymentslibrary.YoPaymentsResponse;
 
 public class MainActivity extends AppCompatActivity {
@@ -18,8 +17,6 @@ public class MainActivity extends AppCompatActivity {
     private EditText phone_number;
     private EditText amount;
     private EditText reason;
-
-    private ProgressBar progress;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,20 +28,17 @@ public class MainActivity extends AppCompatActivity {
         reason = (EditText) findViewById(R.id.pay_input_reason);
         Button pay_btn = (Button) findViewById(R.id.pay_button);
 
-        progress = (ProgressBar) findViewById(R.id.progress_bar);
-
         pay_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Log.i("YOPAY", "Here we go...");
                 Log.i("YOPAY", "Clicked Button. Going to callYO now...");
-                YoPayFinal yoPay = new YoPayFinal("username", "password");
-                yoPay.setMsisdn("256712256785");
-                yoPay.setAmount(500);
-                yoPay.setNarrative("Reason for deposit of funds");
-                yoPay.setProgressBar(progress);
+                YoPay yoAPI = new YoPay("YoAPIUsername", "YoAPIPassword");
+                yoAPI.setMsisdn("256712256785");
+                yoAPI.setAmount(500);
+                yoAPI.setNarrative("Reason for deposit of funds");
                 try {
-                    YoPaymentsResponse response = yoPay.execute("acdepositfunds").get();
+                    YoPaymentsResponse response = yoAPI.execute("acdepositfunds").get();
                     Log.i("YOPAY", "" + response.toString());
                 } catch (InterruptedException e) {
                     e.printStackTrace();
